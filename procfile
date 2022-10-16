@@ -1,0 +1,1 @@
+web: gunicorn ecommerce-auction-website-main.wsgi --log-file .
