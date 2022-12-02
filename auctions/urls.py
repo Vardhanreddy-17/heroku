@@ -1,8 +1,6 @@
 from django.urls import path
 
 from . import views
-from django.views.static import serve
-from django.conf.urls import url
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -19,6 +17,4 @@ urlpatterns = [
     path('auction/<str:auction_id>/close', views.auction_close, name='auction_close'),
     path('auction/<str:auction_id>/comment', views.auction_comment, name='auction_comment'),
     path('categories/<str:category_name>', views.category_details_view, name='category_details_view'),
-    url(r'^media/(?P<path>.*)$', serve,{'document_root':       settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve,{'document_root': settings.STATIC_ROOT}),
 ]

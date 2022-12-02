@@ -1,15 +1,17 @@
 import os
 from decouple import config
+import django_heroku
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = [
-    '127.0.0.1','auction17.herokuapp.com'
+    'localhost',
+    '127.0.0.1',
 ]
 
 
@@ -29,7 +31,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -116,7 +117,7 @@ STATIC_URL = '/static/'
 
 # Location where Django collects all static files
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # Location where we will store our static files
 STATICFILES_DIRS = [ os.path.join(BASE_DIR, 'static') ]
 
@@ -129,6 +130,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SESSION_EXPIRE_AFTER_LAST_ACTIVITY_GRACE_PERIOD = 60
+
+django_heroku.settings(locals())
 
 
 
